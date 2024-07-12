@@ -48,6 +48,8 @@ jobs:
       uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       with:
         persist-credentials: false
+        ref: '1.9'
+        fetch-depth: 0
     - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
       with:
         path: ~/.m2/repository
@@ -60,6 +62,10 @@ jobs:
       uses: github/codeql-action/init@b611370bb5703a7efb587f9d136a52ea24c5c38c    # 3.25.11
       with:
         languages: ${{ matrix.language }}
+        config: |
+          disable-default-queries: true
+          queries:
+          - uses: security-extended
         # If you wish to specify custom queries, you can do so here or in a config file.
         # By default, queries listed here will override any specified in a config file.
         # Prefix the list here with "+" to use these queries and those in the config file.
